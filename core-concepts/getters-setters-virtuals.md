@@ -15,7 +15,7 @@ const User = sequelize.define('user', {
   username: {
     type: DataTypes.STRING,
     get() {
-      const rawValue = this.getDataValue(username);
+      const rawValue = this.getDataValue('username');
       return rawValue ? rawValue.toUpperCase() : null;
     }
   }
@@ -27,7 +27,7 @@ const User = sequelize.define('user', {
 ```js
 const user = User.build({ username: 'SuperUser123' });
 console.log(user.username); // 'SUPERUSER123'
-console.log(user.getDataValue(username)); // 'SuperUser123'
+console.log(user.getDataValue('username')); // 'SuperUser123'
 ```
 
 注意,尽管上面记录为 `SUPERUSER123`,但是真正存储在数据库中的值仍然是 `SuperUser123`. 我们使用了 `this.getDataValue(username)` 来获得该值,并将其转换为大写.
